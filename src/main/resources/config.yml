@@ -1,0 +1,42 @@
+#######################################################
+#    _   _ _____ _____  _       ___   _   _  _____    #
+#   | \ | |_   _/  __ \| |     / _ \ | \ | |/  ___|   #
+#   |  \| | | | | /  \/| |    / /_\ \|  \| |\ `--.    #
+#   | . ` | | | | |    | |    |  _  || . ` | `--. \   #
+#   | |\  | | | | \__/\| |____| | | || |\  |/\__/ /   #
+#   \_| \_/ \_/  \____/\_____/\_| |_/\_| \_/\____/    #
+#    Simple clans plugin created by Nertzhul#3788     #
+#######################################################
+
+# The following block defines the general settings for plugin.
+Clans:
+  # Defines whether or not if the custom chat format should be used.
+  useCustomChatFormat: true
+  chat-format: '&7[&6%clan_tag%&7] &r%player%: %message%'
+
+# The following block defines the settings for database storage methods.
+# - You don't need to touch any of the settings here if you're using a local storage method!
+Data:
+  # How the plugin should store data
+  #
+  # - Possible options: YAML
+  # - A YAML database is the default option.
+  storage-method: YAML
+
+  # Defines whether or not if the MySql database should be used.
+  enableMySQL: false
+
+  # Defines the parameters for connecting to a MySql database.
+  host: 'localhost'
+  port: 3306
+  database: 'minecraft'
+  username: 'root'
+  password: ''
+
+  # This setting allows you to define extra properties for connections.
+  # The prefix is for all SQL tables. Change it you want to use different tables for different servers.
+  properties:
+    useSSL: false
+    useUnicode: true
+    characterEncoding: utf8
+    tablePrefix: 'ntclans_'

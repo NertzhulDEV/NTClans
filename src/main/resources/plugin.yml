@@ -1,0 +1,47 @@
+name: NTClans
+version: ${project.version}
+main: me.nertzhul.ntclans.NTClans
+api-version: 1.16
+softdepend: [ Vault, PlaceholderAPI ]
+authors: [ Nertzhul ]
+commands:
+  ntclans:
+    description: Main clans command.
+    aliases: ["ntc", "clan"]
+
+permissions:
+  ntclans.*:
+    description: "Ability to use all of the commands from NTClans"
+    children:
+      ntclans.player: true
+      ntclans.admin.*: true
+  ntclans.player:
+    description: "Default player permissions"
+    children:
+      ntclans.help: true
+      ntclans.create: true
+      ntclans.delete: true
+      ntclans.info: true
+  ntclans.admin.*:
+    description: "Ability to use admin commands from NTClans"
+    children:
+      ntclans.admin.debug: true
+      ntclans.admin.reload: true
+  ntclans.help:
+    description: "Allows you to view the help list."
+    default: true
+  ntclans.create:
+    description: "Allows you to create a new clan."
+    default: true
+  ntclans.delete:
+    description: "Allows you to delete your current clan.(If owner)"
+    default: true
+  ntclans.info:
+    description: "Allows you to view clan info."
+    default: true
+  ntclans.admin.debug:
+    description: "Allows you to access the debug command."
+    default: op
+  ntclans.admin.reload:
+    description: "Allows you to access the reload command."
+    default: op

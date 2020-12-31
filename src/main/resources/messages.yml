@@ -1,0 +1,48 @@
+GENERAL:
+  PREFIX: "&7[&bNTCLANS&7]&r"
+  HELP: "&b&lNTClans &3v&b%version% &3by &bNertzhul#3788 \n&7Use &b/ntclans help &7para a lista de comandos disponiveis."
+  ARGS_HINT: "&b<> &7- Argumento obrigatório | &b[] &7- Argumento opcional"
+
+COMMAND:
+  DISPLAY_HELP: "&7- &b/ntclans help &f- &7Mostra a lista de ajuda."
+  DISPLAY_CREATE: "&7- &b/ntclans create <clan_nome> &f- &7Cria um novo clan."
+  DISPLAY_DELETE: "&7- &b/ntclans delete &f- &7Deleta o seu clan atual."
+  DISPLAY_INFO: "&7- &b/ntclans info [clan_nome] &f- &7Mostra as informações do clan."
+  DISPLAY_INVITE: "&7- &b/ntclans invite <player> &f- &7Convida um jogador para o seu clan."
+  DISPLAY_ACCEPT_DENY: "&7- &b/ntclans accept/deny &f- &7Aceita/Recusa um convite de clan."
+  DISPLAY_RELOAD: "&7- &b/ntclans reload &f- &7Recarrega o plugin."
+
+  MESSAGE_COMMAND_NOT_FOUND: "%prefix% &cEsse comando não existe."
+  MESSAGE_NO_PERMISSION: "%prefix% &cVocê não tem permissão para executar esse comando."
+  MESSAGE_COMMAND_FAIL: "%prefix% &cOcorreu um erro ao executar esse comando, por favor contate um administrador."
+  MESSAGE_RELOAD_COMPLETE: "%prefix% &aPlugin recarregado com sucesso!"
+
+CLAN:
+  MESSAGE_ALREADY_IN_CLAN: "%prefix% &cVocê já pertence a um clan! Saia do seu clan atual para criar/juntar-se a um novo."
+  MESSAGE_NO_CLAN: "%prefix% &cVocê não pertence a nenhum clan! Entre em um clan para usar esse comando."
+  MESSAGE_NO_INVITE: "%prefix% &cVocê não tem nenhum convite de clan pendente."
+
+  MESSAGE_CREATE_SUCCESS: "%prefix% &aClan criado com sucesso!"
+  MESSAGE_CREATE_INVALID_NAME: "%prefix% &cNome inválido! Por favor insira apenas 1 palavra para o nome do seu clan. \n&c(Permitido apenas caracteres alpha-numericos e minimo de 3 letras)"
+  MESSAGE_DELETE_SUCCESS: "%prefix% &aClan deletado com sucesso!"
+  MESSAGE_DELETE_PERMISSION: "%prefix% &cApenas o dono do clan pode executar esse comando."
+  MESSAGE_INVITE_ACCEPT: " &b[ACEITAR] "
+  MESSAGE_INVITE_ACCEPT_HOVER: "&7Clique aqui para aceitar o convite de clan"
+  MESSAGE_INVITE_DENY: " &b[RECUSAR] "
+  MESSAGE_INVITE_DENY_HOVER: "&7Clique aqui para recusar o convite de clan"
+  MESSAGE_INVITE_SUCCESS: "%prefix% &aO convite de clan foi enviado com sucesso."
+  MESSAGE_INVITE_ACCEPTED: "%prefix% &aO jogador aceitou seu convite de clan."
+  MESSAGE_INVITE_DENIED: "%prefix% &cO jogador recusou seu convite de clan."
+  MESSAGE_INVITE_INVITED: "%prefix% &7Você foi convidado para o clan &e%clan_name%&7."
+  MESSAGE_INVITE_INVITED_ACCEPTED: "%prefix% &7Você &aACEITOU &7o convite para o clan &e%clan_name%&7."
+  MESSAGE_INVITE_INVITED_DENIED: "%prefix% &7Você &cRECUSOU &7o convite para o clan &e%clan_name%&7."
+  MESSAGE_INVITE_INVALID: "%prefix% &cVocê deve informar um player para convidá-lo para seu clan ou accept/deny para responder ao convite de clan."
+  MESSAGE_INVITE_INVALID_PLAYER: "%prefix% &cO player informado é inválido, não está online ou não existe."
+  MESSAGE_INVITE_ALREADY_IN_CLAN: "%prefix% &eO player informado já é membro de um clan."
+  MESSAGE_INFO_NOT_FOUND: "%prefix% &eO clan informado não existe."
+  MESSAGE_INFO_LAYOUT:
+    - "%clan_info_header%"
+    - "Nome: %clan_name% (%clan_tag%)"
+    - "Lider: %clan_owner%"
+    - "Membros: %clan_members%"
+    - "%clan_info_footer%"
