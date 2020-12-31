@@ -3,10 +3,6 @@ package me.nertzhul.ntclans.commands.player;
 import me.nertzhul.ntclans.NTClans;
 import me.nertzhul.ntclans.commands.SubCommand;
 import me.nertzhul.ntclans.handlers.clans.Clan;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -15,11 +11,11 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class ClanInviteCommand extends SubCommand {
     private final NTClans plugin = NTClans.getInstance();
     private FileConfiguration messages = plugin.dataHandler.getMessages();
-    private int inviteSchedule;
 
     public ClanInviteCommand() {
         super("invite", new String[0], null);
@@ -40,9 +36,10 @@ public class ClanInviteCommand extends SubCommand {
                         return true;
                     }
                     Player clanOwner = Bukkit.getPlayer(plugin.getClanInvites().get(player).getClanOwner());
+                    plugin.clanManager.joinClan(player, plugin.getClanInvites().get(player));
+
                     player.sendMessage(plugin.chatUtils.sendMessage(plugin.getClanInvites().get(player).getClanName(), messages.getString("CLAN.MESSAGE_INVITE_INVITED_ACCEPTED")));
                     clanOwner.sendMessage(plugin.chatUtils.sendMessage(null, messages.getString("CLAN.MESSAGE_INVITE_ACCEPTED")));
-                    Bukkit.getScheduler().cancelTask(this.inviteSchedule);
                     plugin.getClanInvites().remove(player);
                     break;
                 case "deny":
@@ -51,9 +48,9 @@ public class ClanInviteCommand extends SubCommand {
                         return true;
                     }
                     Player clanOwner1 = Bukkit.getPlayer(plugin.getClanInvites().get(player).getClanOwner());
+
                     player.sendMessage(plugin.chatUtils.sendMessage(plugin.getClanInvites().get(player).getClanName(), messages.getString("CLAN.MESSAGE_INVITE_INVITED_DENIED")));
                     clanOwner1.sendMessage(plugin.chatUtils.sendMessage(null, messages.getString("CLAN.MESSAGE_INVITE_DENIED")));
-                    Bukkit.getScheduler().cancelTask(this.inviteSchedule);
                     plugin.getClanInvites().remove(player);
                     break;
                 default:
@@ -61,12 +58,12 @@ public class ClanInviteCommand extends SubCommand {
                         player.sendMessage(plugin.chatUtils.sendMessage(null, messages.getString("CLAN.MESSAGE_NO_CLAN")));
                         return true;
                     }
-                    if (plugin.clanManager.getClanByPlayer(Bukkit.getPlayer(args[0])) != null) {
-                        player.sendMessage(plugin.chatUtils.sendMessage(null, messages.getString("CLAN.MESSAGE_INVITE_ALREADY_IN_CLAN")));
-                        return true;
-                    }
                     if (Bukkit.getPlayer(args[0]) == null) {
                         player.sendMessage(plugin.chatUtils.sendMessage(null, messages.getString("CLAN.MESSAGE_INVITE_INVALID_PLAYER")));
+                        return true;
+                    }
+                    if (plugin.clanManager.getClanByPlayer(Bukkit.getPlayer(args[0])) != null) {
+                        player.sendMessage(plugin.chatUtils.sendMessage(null, messages.getString("CLAN.MESSAGE_INVITE_ALREADY_IN_CLAN")));
                         return true;
                     }
 
@@ -82,22 +79,13 @@ public class ClanInviteCommand extends SubCommand {
     }
 
     public void invitePlayer(Player player, Clan clan) {
-        inviteSchedule = Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
             @Override
             public void run() {
                 plugin.getClanInvites().remove(player);
             }
         }, 5 * 60 * 20);
-        ComponentBuilder inviteMessage = new ComponentBuilder(plugin.chatUtils.sendMessage(clan.getClanName(), messages.getString("CLAN.MESSAGE_INVITE_INVITED")))
-                .append(plugin.chatUtils.sendMessage(clan.getClanName(), messages.getString("CLAN.MESSAGE_INVITE_ACCEPT")))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, (new Text(plugin.chatUtils.sendMessage(clan.getClanName(), messages.getString("CLAN.MESSAGE_INVITE_ACCEPT_HOVER"))))))
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/ntclans invite accept"))
-                .append("§3|", ComponentBuilder.FormatRetention.NONE)
-                .append(plugin.chatUtils.sendMessage(clan.getClanName(), messages.getString("CLAN.MESSAGE_INVITE_DENY")))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, (new Text(plugin.chatUtils.sendMessage(clan.getClanName(), messages.getString("CLAN.MESSAGE_INVITE_DENY_HOVER"))))))
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/ntclans invite deny"));
-
-        player.spigot().sendMessage(inviteMessage.create());
+        player.sendMessage(plugin.chatUtils.sendMessage(clan.getClanName(), messages.getString("CLAN.MESSAGE_INVITE_INVITED")));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package me.nertzhul.ntclans.utils;
 
 import me.nertzhul.ntclans.NTClans;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -22,6 +23,15 @@ public class DataHandler {
         this.messages = YamlConfiguration.loadConfiguration(this.messagesFile);
         this.database = YamlConfiguration.loadConfiguration(this.databaseFile);
 
+    }
+
+    public void reloadFiles() {
+        try {
+            this.messages.load(this.messagesFile);
+            this.database.load(this.databaseFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
     }
 
     public FileConfiguration getMessages () {

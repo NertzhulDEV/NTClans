@@ -44,6 +44,7 @@ public class ChatUtils {
             return formatColor(message);
         } else {
             if (param instanceof Player) {
+                message = message.replace("%player%", ((Player) param).getName());
                 return formatMessage(plugin.clanManager.getClanByPlayer((Player) param), message);
             } else if (param instanceof String) {
                 return formatMessage(plugin.clanManager.getClanByName((String) param), message);

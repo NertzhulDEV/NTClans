@@ -9,7 +9,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class ChatManager implements Listener {
     private final NTClans plugin = NTClans.getInstance();
-    private String chatFormat = plugin.getConfig().getString("Clans.chat-format");
+    private final String chatFormat = plugin.getConfig().getString("Clans.chat-format");
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerChatEvent (AsyncPlayerChatEvent e){

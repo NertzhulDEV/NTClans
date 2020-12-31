@@ -6,6 +6,7 @@ import me.nertzhul.ntclans.handlers.clans.ClanManager;
 import me.nertzhul.ntclans.handlers.database.Database;
 import me.nertzhul.ntclans.handlers.database.DatabaseManager;
 import me.nertzhul.ntclans.listeners.ChatManager;
+import me.nertzhul.ntclans.listeners.PlayerManager;
 import me.nertzhul.ntclans.utils.ChatUtils;
 import me.nertzhul.ntclans.utils.DataHandler;
 import me.nertzhul.ntclans.utils.Placeholders;
@@ -110,6 +111,7 @@ public final class NTClans extends JavaPlugin {
         getCommand("ntclans").setExecutor((CommandExecutor) new ClansCommand());
         getCommand("ntclans").setTabCompleter((TabCompleter) new ClansCommand());
         getServer().getPluginManager().registerEvents(new ChatManager(), this);
+        getServer().getPluginManager().registerEvents(new PlayerManager(), this);
     }
 
     public void setupDatabase(){

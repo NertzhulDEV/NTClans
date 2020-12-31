@@ -20,22 +20,16 @@ public class ReloadCommand extends SubCommand {
     @Override
     public boolean execute(CommandSender sender, String[] args) {
         try {
+            plugin.dataHandler.reloadFiles();
             plugin.reloadConfig();
             plugin.reloadClans();
             sender.sendMessage(plugin.chatUtils.sendMessage(null, messages.getString("COMMAND.MESSAGE_RELOAD_COMPLETE")));
         } catch (Exception e) {
+            sender.sendMessage(plugin.chatUtils.sendMessage(null, messages.getString("COMMAND.MESSAGE_COMMAND_FAIL")));
             e.printStackTrace();
         }
 
 
         return false;
-    }
-
-    @Override
-    public void complete(CommandSender sender, String alias, List<String> params, List<String> suggestions) {
-        if (params.size() != 1)
-            return;
-        Stream<String> suggests = Arrays.stream(new String[]{"all", "messages", "database"});
-        suggestByParameter(suggests, suggestions, params.isEmpty() ? null : params.get(params.size() - 1));
     }
 }
