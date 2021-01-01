@@ -1,9 +1,7 @@
-sudo: false
 dist: xenial
 language: java
 jdk:
   - openjdk15
-  - openjdk9
 cache:
   directories:
   - $HOME/.m2
