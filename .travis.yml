@@ -1,1 +1,3 @@
+dist: xenial
 language: java
+os: linux
